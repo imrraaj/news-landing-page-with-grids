@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design</title>
+    <link rel="stylesheet" href="./design.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+
+    <nav data-isopen="true">
+        <div class="logo-section nav-section">
+            <a href="#">
+                <i class='bx bx-cube-alt'></i>
+            </a>
+        </div>
+        <div class="link-section nav-section">
+            <a href="#">ABOUT</a>
+            <a href="#">WORK</a>
+        </div>
+        <div class="social-section nav-section">
+            <a href="#">
+                <i class='bx bxl-instagram'></i>
+            </a>
+            <a href="#">
+                <i class='bx bxl-dribbble'></i>
+            </a>
+            <a href="#">
+                <i class='bx bxl-linkedin'></i>
+            </a>
+        </div>
+        <div class="contact-section nav-section">
+            <a href="#">GET IN TOUCH</a>
+        </div>
+
+        <div>
+            <a href="#" class="mobile-nav-icon" id="mobile-nav">
+                MENU
+                <i class='bx bx-menu'></i>
+            </a>
+        </div>
+
+    </nav>
+
+
+
+    <main>
+        <article class="article" data-index="0" data-status="active">
+            <div class="article-image-section article-section">
+            </div>
+            <div class="article-description-section article-section">
+                <p>
+                    This is a recreation (from scratch) of dylanbrouwer.design/work. See how I did it .
+                </p>
+            </div>
+            <div class="article-title-section article-section">
+                <h2>RECREATION FROM SCRATCH</h2>
+            </div>
+            <div class="article-nav-section article-section">
+                <button onclick="handleLeftClick();">
+                    <i class='bx bxs-chevrons-left'></i>
+                </button>
+                <button onclick="handleRightClick();">
+                    <i class='bx bxs-chevrons-right'></i>
+                </button>
+            </div>
+        </article>
+
+
+
+
+        <article class="article" data-index="1" data-status="inactive">
+            <div class="article-image-section article-section">
+            </div>
+            <div class="article-description-section article-section">
+                <p>
+                    A place where books hang out waiting to be grabbed. But don't be too grabby now, ya hear.
+                </p>
+            </div>
+            <div class="article-title-section article-section">
+                <h2>WICKED COOL LIBRARY SHELVES</h2>
+            </div>
+            <div class="article-nav-section article-section">
+                <button onclick="handleLeftClick();">
+                    <i class='bx bxs-chevrons-left'></i>
+                </button>
+                <button onclick="handleRightClick();">
+                    <i class='bx bxs-chevrons-right'></i>
+                </button>
+            </div>
+        </article>
+
+
+
+
+
+        <article class="article" data-index="2" data-status="inactive">
+            <div class="article-image-section article-section">
+            </div>
+            <div class="article-description-section article-section">
+                <p>
+                    The neatest lighthouse you ever saw. Ehh, actually it's kind of messy. But that's why the pic is of
+                    the outside.
+                </p>
+            </div>
+            <div class="article-title-section article-section">
+                <h2>NEATO TOLEDO LIGHTHOUSE</h2>
+            </div>
+            <div class="article-nav-section article-section">
+                <button onclick="handleLeftClick();">
+                    <i class='bx bxs-chevrons-left'></i>
+                </button>
+                <button onclick="handleRightClick();">
+                    <i class='bx bxs-chevrons-right'></i>
+                </button>
+            </div>
+        </article>
+
+
+
+
+        <article class="article" data-index="3" data-status="inactive">
+            <div class="article-image-section article-section">
+            </div>
+            <div class="article-description-section article-section">
+                <p>
+                    The blobiest of blobs nestled deep in the heart of outer space. Well, technically the universe is
+                    both infinite and
+                    homogeneous so there isn't really a heart, per se.
+                </p>
+            </div>
+            <div class="article-title-section article-section">
+                <h2>SUPER GIANT SPACE BLOB</h2>
+            </div>
+            <div class="article-nav-section article-section">
+                <button onclick="handleLeftClick();">
+                    <i class='bx bxs-chevrons-left'></i>
+                </button>
+                <button onclick="handleRightClick();">
+                    <i class='bx bxs-chevrons-right'></i>
+                </button>
+            </div>
+        </article>
+    </main>
+    <script>
+        let activeIndex = 0;
+        const articles = document.getElementsByClassName('article');
+
+
+        function handleRightClick() {
+
+            let nextIndex = (activeIndex + 1) <= articles.length - 1 ? (activeIndex + 1) : 0;
+            const currentSlide = document.querySelector(`[data-index="${activeIndex}"]`);
+            const nextSlide = document.querySelector(`[data-index="${nextIndex}"]`);
+
+            currentSlide.dataset.status = "before";
+            nextSlide.dataset.status = "becoming-active-from-after";
+
+
+            setTimeout(() => {
+                nextSlide.dataset.status = "active";
+                activeIndex = nextIndex;
+            });
+        }
+
+        function handleLeftClick() {
+            let nextIndex = (activeIndex - 1) >= 0 ? (activeIndex - 1) : articles.length - 1;
+            const currentSlide = document.querySelector(`[data-index="${activeIndex}"]`);
+            const nextSlide = document.querySelector(`[data-index="${nextIndex}"]`);
+
+
+            currentSlide.dataset.status = "after";
+            nextSlide.dataset.status = "becoming-active-from-before";
+
+            setTimeout(() => {
+                nextSlide.dataset.status = "active";
+                activeIndex = nextIndex;
+            });
+        }
+
+
+        const menu = document.getElementById('mobile-nav');
+        const nav = document.querySelector('nav');
+        menu.addEventListener('click', () => {
+            if (nav.dataset.isopen == "true") {
+                nav.dataset.isopen = "false";
+            } else {
+                nav.dataset.isopen = "true";
+            }
+        })
+    </script>
+</body>
+
+</html>
